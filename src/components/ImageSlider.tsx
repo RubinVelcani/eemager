@@ -27,29 +27,29 @@ const responsive = {
 	},
 }
 
-const CustomRightArrow = ({ onClick }) => (
+const CustomRightArrow = ({ onClick }: { onClick?: () => void }) => (
 	<button
 		onClick={e => {
 			e.stopPropagation()
-			onClick()
+			onClick && onClick()
 		}}
 	>
 		<BiSolidChevronRightCircle className='absolute right-4 w-6 h-6 flex items-center justify-center text-[#213547] bg-[#DEE6DB] rounded-full' />
 	</button>
 )
 
-const CustomLeftArrow = ({ onClick, ...rest }) => (
+const CustomLeftArrow = ({ onClick }: { onClick?: () => void }) => (
 	<button
 		onClick={e => {
 			e.stopPropagation()
-			onClick()
+			onClick && onClick()
 		}}
 	>
 		<BiSolidChevronLeftCircle className='absolute left-4 w-6 h-6 flex items-center justify-center text-[#213547] bg-[#DEE6DB] rounded-full' />
 	</button>
 )
 
-const ImageSlider = ({ children, ...rest }) => {
+const ImageSlider = ({ children, ...rest }: { children: React.ReactNode[]; slidesToSlide: number; className: string }) => {
 	return (
 		<Carousel responsive={responsive} partialVisible={true} customRightArrow={<CustomRightArrow />} customLeftArrow={<CustomLeftArrow />} {...rest}>
 			{...children}

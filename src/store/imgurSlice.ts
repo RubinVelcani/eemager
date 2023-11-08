@@ -111,7 +111,7 @@ const imgurSlice = createSlice({
 })
 
 export const selectSection = (state: RootState) => state.imgur.filters.section
-export const selectSort = (state: RootState) => state.imgur.filters.showViral
+export const selectSort = (state: RootState) => state.imgur.filters.sort
 export const selectPage = (state: RootState) => state.imgur.filters.page
 export const selectWindow = (state: RootState) => state.imgur.filters.window
 export const selectShowViral = (state: RootState) => state.imgur.filters.showViral
