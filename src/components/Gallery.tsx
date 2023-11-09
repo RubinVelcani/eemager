@@ -20,7 +20,7 @@ const Gallery = () => {
 	const showViral = useSelector(selectShowViral)
 
 	const memoizedGalleryImages = useMemo(() => galleryImages, [galleryImages])
-
+	
 	useEffect(() => {
 		dispatch(fetchGalleryImages())
 	}, [section, sort, page, window, showViral])
@@ -36,7 +36,7 @@ const Gallery = () => {
 	}
 
 	if (loading === 'failed') {
-		return <div>Error: {error}</div>
+		return <div className='w-full t-3xl font-bold text-center p-10'>Error: {error}</div>
 	}
 
 	return (

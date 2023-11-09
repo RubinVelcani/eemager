@@ -3,7 +3,7 @@ import 'react-multi-carousel/lib/styles.css'
 
 import { BiSolidChevronRightCircle, BiSolidChevronLeftCircle } from 'react-icons/bi'
 
-const responsive = {
+const carouselResponsivity = {
 	desktop: {
 		breakpoint: {
 			max: 3000,
@@ -51,7 +51,7 @@ const CustomLeftArrow = ({ onClick }: { onClick?: () => void }) => (
 
 const ImageSlider = ({ children, ...rest }: { children: React.ReactNode[]; slidesToSlide: number; className: string }) => {
 	return (
-		<Carousel responsive={responsive} partialVisible={true} customRightArrow={<CustomRightArrow />} customLeftArrow={<CustomLeftArrow />} {...rest}>
+		<Carousel responsive={carouselResponsivity} partialVisible={true} customRightArrow={<CustomRightArrow />} customLeftArrow={<CustomLeftArrow />} {...rest}>
 			{...children}
 		</Carousel>
 	)

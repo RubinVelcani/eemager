@@ -23,6 +23,7 @@ export type ImgurImageType = {
 	id: string
 	link: string
 	title: string
+	description: string
 	images: any[]
 	comment_count: number
 	views: number
