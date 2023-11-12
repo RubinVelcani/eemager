@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, ChangeEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ThunkDispatch } from '@reduxjs/toolkit'
+import { ThunkDispatch, Action } from '@reduxjs/toolkit'
+import { RootState } from '../store/store'
 
 import useClickOutside from '../hooks/useClickOutside'
 import { updateSection, updateSort, updateWindow, updateShowViral, updatePage, selectShowViral, selectPage } from '../store/imgurSlice'
@@ -13,7 +14,7 @@ const Filters: React.FunctionComponent = () => {
 	const page = useSelector(selectPage)
 	const showViral = useSelector(selectShowViral)
 
-	const dispatch = useDispatch<ThunkDispatch<any, any, any>>()
+	const dispatch = useDispatch<ThunkDispatch<RootState, unknown, Action>>()
 
 	const menuRef = useRef(null)
 
@@ -39,14 +40,13 @@ const Filters: React.FunctionComponent = () => {
 								ref={menuRef}
 								className={`fixed z-40 -translate-x-full top-0 left-0 width-4/5 h-auto ${isMenuOpen ? 'transform translate-x-0' : ''}`}
 							>
-								{/* <button onClick={toggleMenu}>Close Menu</button> */}
 								<div className='flex flex-col items-start gap-4 p-8'>
 									<h2 className='text-3xl font-bold lg:hidden'>Gallery filters</h2>
 									<div className='w-full flex items-center justify-between gap-3'>
 										<label className='font-medium'>Section</label>
 										<select
 											className='rounded-lg bg-[#99AA38] shadow px-3 py-2 '
-											onChange={({ target }: any) => dispatch(updateSection(target.value))}
+											onChange={(e: ChangeEvent<HTMLSelectElement>) => dispatch(updateSection(e.target.value))}
 										>
 											<option value='hot'>Hot</option>
 											<option value='top'>Top</option>
@@ -55,7 +55,7 @@ const Filters: React.FunctionComponent = () => {
 									</div>
 									<div className='w-full flex items-center justify-between gap-3'>
 										<label className='font-medium'>Sort</label>
-										<select className='rounded-lg bg-[#99AA38] shadow px-3 py-2 ' onChange={({ target }: any) => dispatch(updateSort(target.value))}>
+										<select className='rounded-lg bg-[#99AA38] shadow px-3 py-2 ' onChange={(e: ChangeEvent<HTMLSelectElement>) => dispatch(updateSort(e.target.value))}>
 											<option value='viral'>Viral</option>
 											<option value='top'>Top</option>
 											<option value='time'>Time</option>
@@ -64,7 +64,7 @@ const Filters: React.FunctionComponent = () => {
 									</div>
 									<div className='w-full flex items-center justify-between gap-3'>
 										<label className='font-medium'>Period</label>
-										<select className='rounded-lg bg-[#99AA38] px-3 py-2 ' onChange={({ target }: any) => dispatch(updateWindow(target.value))}>
+										<select className='rounded-lg bg-[#99AA38] px-3 py-2 ' onChange={(e: ChangeEvent<HTMLSelectElement>) => dispatch(updateWindow(e.target.value))}>
 											<option value='day'>Day</option>
 											<option value='week'>Week</option>
 											<option value='month'>Month</option>
@@ -101,7 +101,7 @@ const Filters: React.FunctionComponent = () => {
 				<div className='w-full flex justify-between gap-8 items-center]'>
 					<div className='w-full flex items-center justify-between gap-3'>
 						<label className='font-medium'>Section</label>
-						<select className='rounded-lg bg-[#99AA38] shadow px-3 py-2 ' onChange={({ target }: any) => dispatch(updateSection(target.value))}>
+						<select className='rounded-lg bg-[#99AA38] shadow px-3 py-2 ' onChange={(e: ChangeEvent<HTMLSelectElement>) => dispatch(updateSection(e.target.value))}>
 							<option value='hot'>Hot</option>
 							<option value='top'>Top</option>
 							<option value='user'>User</option>
@@ -109,7 +109,7 @@ const Filters: React.FunctionComponent = () => {
 					</div>
 					<div className='w-full flex items-center justify-between gap-3'>
 						<label className='font-medium'>Sort</label>
-						<select className='rounded-lg bg-[#99AA38] shadow px-3 py-2 ' onChange={({ target }: any) => dispatch(updateSort(target.value))}>
+						<select className='rounded-lg bg-[#99AA38] shadow px-3 py-2 ' onChange={(e: ChangeEvent<HTMLSelectElement>) => dispatch(updateSort(e.target.value))}>
 							<option value='viral'>Viral</option>
 							<option value='top'>Top</option>
 							<option value='time'>Time</option>
@@ -120,7 +120,7 @@ const Filters: React.FunctionComponent = () => {
 				<div className='w-full flex justify-between gap-8 items-center'>
 					<div className='w-full flex items-center justify-between gap-3'>
 						<label className='font-medium'>Period</label>
-						<select className='rounded-lg bg-[#99AA38] px-3 py-2 ' onChange={({ target }: any) => dispatch(updateWindow(target.value))}>
+						<select className='rounded-lg bg-[#99AA38] px-3 py-2 ' onChange={(e: ChangeEvent<HTMLSelectElement>) => dispatch(updateWindow(e.target.value))}>
 							<option value='day'>Day</option>
 							<option value='week'>Week</option>
 							<option value='month'>Month</option>

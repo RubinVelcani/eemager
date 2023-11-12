@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ThunkDispatch } from '@reduxjs/toolkit'
+import { Action, ThunkDispatch } from '@reduxjs/toolkit'
 
 import { fetchGalleryImages, selectSection, selectPage, selectSort, selectWindow, selectShowViral } from '../store/imgurSlice'
 import { RootState } from '../store/store'
@@ -9,7 +9,7 @@ import ImageCard from './ImageCard'
 import SkeletonImageCard from './SkeletonImageCard'
 
 const Gallery: React.FunctionComponent = () => {
-	const dispatch = useDispatch<ThunkDispatch<any, any, any>>()
+	const dispatch = useDispatch<ThunkDispatch<RootState, unknown, Action>>()
 	const { loadingStatus, error } = useSelector((state: RootState) => state.imgur)
 	const { galleryImages } = useSelector((state: RootState) => state.imgur)
 
@@ -21,7 +21,7 @@ const Gallery: React.FunctionComponent = () => {
 	
 	useEffect(() => {
 		dispatch(fetchGalleryImages())
-	}, [section, sort, page, window, showViral])
+	}, [dispatch, section, sort, page, window, showViral])
 
 	if (loadingStatus === 'loading') {
 		return (

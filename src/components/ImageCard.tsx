@@ -1,8 +1,9 @@
 import { useDispatch } from 'react-redux';
-import { ThunkDispatch } from '@reduxjs/toolkit';
+import { Action, ThunkDispatch } from '@reduxjs/toolkit';
 import { FaRegThumbsUp, FaRegComments, FaRegEye } from 'react-icons/fa'
 
-import { updateSelectedImage } from '../store/imgurSlice';
+import { NestedImageType, updateSelectedImage } from '../store/imgurSlice';
+import { RootState } from '../store/store';
 
 type ImageCardPropType = {
   imageData: ImageDataPropType
@@ -11,7 +12,7 @@ type ImageCardPropType = {
 type ImageDataPropType = {
 	id: string
 	title: string
-	images: any[]
+	images: NestedImageType[] 
 	ups: number
 	comment_count: number
 	views: number
@@ -20,7 +21,7 @@ type ImageDataPropType = {
 const ImageCard: React.FunctionComponent<ImageCardPropType> = ({imageData }: ImageCardPropType) => {
 	const { id, title, images, ups, comment_count, views } = imageData
 
-	const dispatch = useDispatch<ThunkDispatch<any, any, any>>()
+	const dispatch = useDispatch<ThunkDispatch<RootState, unknown, Action>>()
 	const handleSelectImage = (event: React.MouseEvent<HTMLElement>) => { 
 		event.stopPropagation();
 		dispatch(updateSelectedImage(id))

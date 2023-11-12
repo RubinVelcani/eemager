@@ -3,10 +3,10 @@ import { apiClient } from '../client/apiClient'
 import { RootState } from './store'
 
 type FiltersType = {
-	section: 'hot' | 'top' | 'user'
-	sort: 'viral' | 'top' | 'time' | 'rising'
+	section: string
+	sort: string
 	page: number
-	window: 'day' | 'week' | 'month' | 'year' | 'all'
+	window: string
 	showViral: boolean
 }
 
@@ -82,16 +82,16 @@ const imgurSlice = createSlice({
 	name: 'imgur',
 	initialState,
 	reducers: {
-		updateSection: (state, action: PayloadAction<'hot' | 'top' | 'user'>) => {
+		updateSection: (state, action: PayloadAction<string>) => {
 			state.filters.section = action.payload
 		},
-		updateSort: (state, action: PayloadAction<'viral' | 'top' | 'time' | 'rising'>) => {
+		updateSort: (state, action: PayloadAction<string>) => {
 			state.filters.sort = action.payload
 		},
 		updatePage: (state, action: PayloadAction<number>) => {
 			state.filters.page = action.payload
 		},
-		updateWindow: (state, action: PayloadAction<'day' | 'week' | 'month' | 'year' | 'all'>) => {
+		updateWindow: (state, action: PayloadAction<string>) => {
 			state.filters.window = action.payload
 		},
 		updateShowViral: (state, action: PayloadAction<boolean>) => {
