@@ -13,10 +13,19 @@ type FiltersType = {
 type ImgurStateType = {
 	galleryImages: ImgurImageType[]
 	filters: FiltersType
-	loading: 'idle' | 'loading' | 'succeeded' | 'failed'
+	loadingStatus: 'idle' | 'loading' | 'succeeded' | 'failed'
 	error: string | null
 	selectedImage: ImgurImageType | null
 	showPopup: boolean
+}
+
+export type NestedImageType = {
+	id: string
+	title: string
+	images: NestedImageType[]
+	description: string
+	type: string
+	link: string
 }
 
 export type ImgurImageType = {
@@ -24,16 +33,17 @@ export type ImgurImageType = {
 	link: string
 	title: string
 	description: string
-	images: any[]
+	images: NestedImageType[]
 	comment_count: number
 	views: number
 	ups: number
 	downs: number
+	score: number
 }
 
 const initialState: ImgurStateType = {
 	galleryImages: [],
-	loading: 'idle',
+	loadingStatus: 'idle',
 	error: null,
 	selectedImage: null,
 	showPopup: false,
@@ -98,14 +108,14 @@ const imgurSlice = createSlice({
 	extraReducers: builder => {
 		builder
 			.addCase(fetchGalleryImages.pending, state => {
-				state.loading = 'loading'
+				state.loadingStatus = 'loading'
 			})
 			.addCase(fetchGalleryImages.fulfilled, (state, action) => {
-				state.loading = 'succeeded'
+				state.loadingStatus = 'succeeded'
 				state.galleryImages = action.payload
 			})
 			.addCase(fetchGalleryImages.rejected, (state, action) => {
-				state.loading = 'failed'
+				state.loadingStatus = 'failed'
 				state.error = action.error.message ?? 'An error occurred.'
 			})
 	},
@@ -120,4 +130,5 @@ export const selectSelectedImage = (state: RootState) => state.imgur.selectedIma
 export const selectShowPopup = (state: RootState) => state.imgur.showPopup
 
 export const { updateSection, updatePage, updateSort, updateWindow, updateShowViral, updateShowPopup, updateSelectedImage } = imgurSlice.actions
+
 export default imgurSlice.reducer

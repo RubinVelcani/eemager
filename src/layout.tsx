@@ -12,11 +12,10 @@ const Layout = ({ children }: LayoutProps) => {
 	const selectedImage = useSelector(selectSelectedImage)
 
   return (
-		<div className='relative z-30'>
+		<div className='w-full relative z-30'>
 			<Header />
 			{selectedImage && <ImagePopup />}
 			{children}
-			<footer>footer</footer>
 		</div>
 	)
 }
